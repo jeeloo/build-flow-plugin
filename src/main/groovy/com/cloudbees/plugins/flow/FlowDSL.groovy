@@ -21,6 +21,8 @@ import hudson.util.spring.ClosureScript
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
+import java.util.Date
+import java.util.concurrent.*
 import java.util.logging.Logger
 import jenkins.model.Jenkins
 import hudson.model.*
@@ -174,19 +176,19 @@ public class FlowDelegate {
         // ask for job with name ${name}
         JobInvocation job = new JobInvocation(flowRun, jobName)
         Job p = job.getProject()
-        println("Schedule job " + HyperlinkNote.encodeTo('/'+ p.getUrl(), p.getFullDisplayName()))
+        println(new Date().format("HH:mm:ss") + " Schedule job " + HyperlinkNote.encodeTo('/'+ p.getUrl(), p.getFullDisplayName()))
 
         flowRun.schedule(job, getActions(p,args));
         Run r = job.waitForStart()
-        println("Build " + HyperlinkNote.encodeTo('/'+ r.getUrl(), r.getFullDisplayName()) + " started")
+        println(new Date().format("HH:mm:ss") + " Build " + HyperlinkNote.encodeTo('/'+ r.getUrl(), r.getFullDisplayName()) + " started")
 
         if (null == r) {
-            println("Failed to start ${jobName}.")
+            println(new Date().format("HH:mm:ss") + " Failed to start ${jobName}.")
             fail();
         }
 
         flowRun.waitForCompletion(job);
-        println(HyperlinkNote.encodeTo('/'+ r.getUrl(), r.getFullDisplayName())
+        println(new Date().format("HH:mm:ss") + " " + HyperlinkNote.encodeTo('/'+ r.getUrl(), r.getFullDisplayName())
                 + " completed ${r.result.isWorseThan(SUCCESS) ? " : " + r.result : ""}")
         return job;
     }
