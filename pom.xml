@@ -32,7 +32,7 @@
 
   <groupId>com.cloudbees.plugins</groupId>
   <artifactId>build-flow-plugin</artifactId>
-  <version>0.12</version>
+  <version>0.12.1</version>
   <packaging>hpi</packaging>
   <name>CloudBees Build Flow plugin</name>
   <description>Manages job orchestration as a build flow</description>
@@ -145,4 +145,3 @@
   </pluginRepositories>
 
 </project>
-
