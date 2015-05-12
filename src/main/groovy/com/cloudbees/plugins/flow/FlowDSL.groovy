@@ -223,6 +223,7 @@ public class FlowDelegate {
             fail();
         }
 
+        flowRun.waitForCompletion(job);
         // [JENKINS-22960] wait for build to be finalized.
         flowRun.waitForFinalization(job);
         println(new Date().format("HH:mm:ss") + " " + HyperlinkNote.encodeTo('/'+ r.getUrl(), r.getFullDisplayName())
